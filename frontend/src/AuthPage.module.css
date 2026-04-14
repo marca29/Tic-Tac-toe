@@ -1,0 +1,122 @@
+.wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #e0fbfc 0%, #f0bcd4 100%);
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.card {
+  width: 100%;
+  max-width: 360px;
+  padding: 30px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(19, 46, 50, 0.15);
+  color: #132e32;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  font-size: clamp(24px, 5vw, 28px);
+  color: #132e32;
+  margin-bottom: 25px;
+  line-height: 1.2;
+  font-family: Arial, sans-serif;
+}
+
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  border: 2px solid #e0fbfc;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  color: #132e32;
+}
+
+.input:focus {
+  border-color: #1d84b5;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(29, 132, 181, 0.1);
+}
+
+.button {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #1d84b5, #132e32);
+  color: #e0fbfc;
+  border: none;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(29, 132, 181, 0.4);
+}
+
+.button:disabled {
+  background: linear-gradient(135deg, #64748b, #475569);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.switch {
+  text-align: center;
+  color: #1d84b5;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 12px 0;
+  font-family: Arial, sans-serif;
+  transition: color 0.2s ease;
+}
+
+.switch:hover {
+  color: #132e32;
+  text-decoration: underline;
+}
+
+.error,
+.success {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: Arial, sans-serif;
+}
+
+.error {
+  color: #b6465f;
+  background: rgba(182, 70, 95, 0.1);
+  border-left: 4px solid #b6465f;
+}
+
+.success {
+  color: #1d84b5;
+  background: rgba(29, 132, 181, 0.1);
+  border-left: 4px solid #1d84b5;
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 10px;
+  }
+
+  .card {
+    padding: 24px 20px;
+    margin: 10px;
+  }
+}

@@ -1,0 +1,105 @@
+.appContainer {
+  padding: 30px 20px;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  background: #e0fbfc;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.gameTitle {
+  font-size: 40px;
+  color: #132e32;
+  margin-bottom: 15px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+}
+
+.userInfo {
+  color: #132e32;
+  font-size: 18px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #f0bcd4, #e0fbfc);
+  border-radius: 30px;
+  display: inline-block;
+  margin-bottom: 30px;
+  font-weight: 600;
+  font-family: Arial, sans-serif;
+}
+
+.statusSection {
+  margin-bottom: 30px;
+  padding: 25px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(19, 46, 50, 0.1);
+}
+
+.statusWin {
+  color: #10b981;
+  font-size: 28px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+}
+
+.statusLose {
+  color: #b6465f;
+  font-size: 28px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+}
+
+.statusAbandoned {
+  color: #f59e0b;
+  font-size: 28px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+}
+
+.statusDraw {
+  color: #1d84b5;
+  font-size: 28px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.btnLobby {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #1d84b5, #132e32);
+  color: #e0fbfc;
+  border: none;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btnNewGame {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #b6465f, #132e32);
+  color: #e0fbfc;
+  border: none;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btnLobby:hover,
+.btnNewGame:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(29, 132, 181, 0.4);
+}
