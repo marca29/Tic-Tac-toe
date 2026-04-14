@@ -22,7 +22,7 @@ npm install
 npm install socket.io-client
 
 # 4. Go back to root directory
-cd ../your_root_directory (eg. tic_tac_toe)
+cd ../Tic-Tac-Toe
 ```
 
 ## 2. Database Setup
@@ -87,7 +87,7 @@ Open Command Prompt/Terminal and type `ipconfig`. Look for the:
 - **IPv4 Address** on Windows
 - **inet** on Mac/Linux
 
-Create a file named `.env` inside the root directory.
+Create a file named `.env` inside the `Tic-Tac-Toe` directory.
 ```
 VITE_API_URL=http://192.168.1.X:3001
 JWT_SECRET=your_very_long_and_random_32_character_secret
