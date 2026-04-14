@@ -22,7 +22,7 @@ npm install
 npm install socket.io-client
 
 # 4. Go back to root directory
-cd your_root_directory (eg. tic_tac_toe)
+cd ../your_root_directory (eg. tic_tac_toe)
 ```
 
 ## 2. Database Setup
@@ -95,6 +95,7 @@ JWT_SECRET=your_very_long_and_random_32_character_secret
 
 ## 4. Running the Application
 You will need two separate terminal windows (or tabs) to run the client and the server simultaneously.
+
 **Terminal 1: Backend**
 ```
 cd backend
