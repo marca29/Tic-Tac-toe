@@ -20,9 +20,6 @@ npm install express cors bcryptjs jsonwebtoken pg socket.io
 cd ../frontend
 npm install
 npm install socket.io-client
-
-# 4. Go back to root directory
-cd ../Tic-Tac-Toe
 ```
 
 ## 2. Database Setup
