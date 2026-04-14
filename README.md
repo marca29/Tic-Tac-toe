@@ -34,6 +34,7 @@ You will need PostgreSQL installed and running. Execute the following SQL script
 - Right-click your database `tic_tac_toe` and select **Query Tool**.
 - Copy, paste, and run the following SQL script to create the required tables:
 ```
+-- 1. USERS (with statistics)
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   username VARCHAR(50) UNIQUE NOT NULL,
@@ -44,22 +45,83 @@ CREATE TABLE users (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- 2. GAMES
 CREATE TABLE games (
   id SERIAL PRIMARY KEY,
   player_x_id INTEGER REFERENCES users(id),
   player_o_id INTEGER REFERENCES users(id),
-  status VARCHAR(20) DEFAULT 'waiting',
+  status VARCHAR(20) DEFAULT 'waiting' CHECK (
+    status IN ('waiting', 'in_progress', 'finished', 'abandoned')
+  ),
   winner_id INTEGER REFERENCES users(id),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- 3. MOVES (for game replay and timer)
 CREATE TABLE moves (
   id SERIAL PRIMARY KEY,
-  game_id INTEGER REFERENCES games(id),
+  game_id INTEGER REFERENCES games(id) ON DELETE CASCADE,
   player_id INTEGER REFERENCES users(id),
-  position INTEGER NOT NULL,
+  position INTEGER CHECK (position >= 0 AND position <= 8),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- 4. INDEXES for performance
+CREATE INDEX idx_games_status ON games(status);
+CREATE INDEX idx_games_player_x ON games(player_x_id);
+CREATE INDEX idx_games_player_o ON games(player_o_id);
+CREATE INDEX idx_moves_game ON moves(game_id);
+CREATE INDEX idx_moves_player ON moves(player_id);
+
+-- 5. TRIGGER: Update statistics after a game
+CREATE OR REPLACE FUNCTION update_player_stats()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- Player X wins
+  IF NEW.status = 'finished'
+     AND NEW.winner_id = (SELECT player_x_id FROM games WHERE id = NEW.id) THEN
+    
+    UPDATE users
+    SET wins = wins + 1
+    WHERE id = (SELECT player_x_id FROM games WHERE id = NEW.id);
+
+    UPDATE users
+    SET losses = losses + 1
+    WHERE id = (SELECT player_o_id FROM games WHERE id = NEW.id);
+
+  -- Player O wins
+  ELSIF NEW.status = 'finished'
+        AND NEW.winner_id = (SELECT player_o_id FROM games WHERE id = NEW.id) THEN
+
+    UPDATE users
+    SET wins = wins + 1
+    WHERE id = (SELECT player_o_id FROM games WHERE id = NEW.id);
+
+    UPDATE users
+    SET losses = losses + 1
+    WHERE id = (SELECT player_x_id FROM games WHERE id = NEW.id);
+
+  -- Draw
+  ELSIF NEW.status = 'finished' AND NEW.winner_id IS NULL THEN
+
+    UPDATE users
+    SET draws = draws + 1
+    WHERE id = (SELECT player_x_id FROM games WHERE id = NEW.id);
+
+    UPDATE users
+    SET draws = draws + 1
+    WHERE id = (SELECT player_o_id FROM games WHERE id = NEW.id);
+  END IF;
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Attach trigger to the games table
+CREATE TRIGGER trigger_update_stats
+AFTER UPDATE OF status, winner_id ON games
+FOR EACH ROW
+EXECUTE FUNCTION update_player_stats();
 ```
 
 ### Database Connection (`db.js`)
